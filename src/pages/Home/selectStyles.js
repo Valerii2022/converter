@@ -1,11 +1,11 @@
 export const selectStyles = {
   control: styles => ({
     borderRadius: '8px',
-    backgroundColor: '#f7f7fb',
+    backgroundColor: 'beige',
     height: '48px',
     display: 'flex',
     padding: '0',
-    // width: '224px',
+    width: '150px',
     paddingLeft: '10px',
     paddingRight: '14px',
     borderRight: 'none',

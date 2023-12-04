@@ -1,5 +1,7 @@
 .container {
   padding: 15px;
+  width: 1440px;
+  margin: 0 auto;
   display: flex;
   gap: 20px;
 }
@@ -10,8 +12,29 @@
 
 .converter {
   width: calc((100% - 20px) / 2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .converterInner {
   display: flex;
+  gap: 8px;
+}
+
+.converterInner label {
+  height: 48px;
+  width: 100%;
+}
+
+.converterInner input {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: beige;
+  border: none;
+
+  color: teal;
+  font-size: 20px;
 }
