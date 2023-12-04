@@ -10,11 +10,11 @@ const Home = () => {
   const [currencyIn, setCurrencyIn] = useState(0);
   const [currencyOut, setCurrencyOut] = useState(0);
 
-  const API_KEY = 'VTCLiMLNPGUnzwu7ny7tuLe8dNWU_EW2';
-  const BASE_URL = 'https://api.exchangeratesapi.io/v1/latest';
-  const params = {
-    access_key: API_KEY,
-  };
+  // const API_KEY = 'VTCLiMLNPGUnzwu7ny7tuLe8dNWU_EW2';
+  // const BASE_URL = 'https://api.exchangeratesapi.io/v1/latest';
+  // const params = {
+  //   access_key: API_KEY,
+  // };
 
   const currencyOptions = [
     { value: 'USD $', label: 'USD $' },
