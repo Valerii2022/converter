@@ -1,11 +1,11 @@
 .container {
-  padding: 50px 15px 15px;
+  padding: 15px;
   width: 1440px;
   margin: 0 auto;
 }
 
 .title {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   text-align: center;
   font-size: 48px;
   line-height: 2;
@@ -15,7 +15,7 @@
 .converterWrapper {
   display: flex;
   gap: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .exchangeWrapper {
@@ -53,4 +53,58 @@
 .converterInner input:disabled {
   color: #706e6e;
   background-color: #ada0a0;
+}
+
+.tableWrapper {
+  height: 600px;
+  width: 800px;
+  overflow: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.ratesList {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.ratesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  color: beige;
+  background-color: teal;
+}
+
+.ratesItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+}
+
+.ratesItem:nth-child(odd) {
+  background-color: beige;
+}
+
+.ratesItem:nth-child(even) {
+  background-color: #e4e4ca;
+}
+
+.ratesHeader th,
+.ratesItem td {
+  width: calc(100% / 3);
+  text-align: center;
+  font-size: 22px;
 }

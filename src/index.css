@@ -34,3 +34,17 @@ h6 {
 a {
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: beige;
+  border-radius: 0 4px 4px 0;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar-thumb {
+  background: teal;
+}

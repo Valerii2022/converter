@@ -13,6 +13,38 @@ const Home = () => {
   const [disabledFrom, setDisabledFrom] = useState(true);
   const [disabledTo, setDisabledTo] = useState(true);
 
+  const currentValue = [];
+  const currentRates = [
+    { title: 'Opssss', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
+    { title: 'Euro', name: 'EUR', rate: 39.3652 },
+  ];
+
   const currencyOptions = [
     { value: 'USD', label: 'USD $' },
     { value: 'EUR', label: 'EUR €' },
@@ -23,7 +55,13 @@ const Home = () => {
     { value: 'DKK', label: 'DKK kr' },
   ];
 
-  const fetchRate = async (from, to) => {
+  currencyOptions.forEach(el => {
+    if (el.value !== 'UAH') {
+      currentValue.push(el.value);
+    }
+  });
+
+  const fetchCurrencyExchange = async (from, to) => {
     await fetchExchange(from, to)
       .then(res => {
         setRate(res.data.rates[to].rate);
@@ -38,7 +76,7 @@ const Home = () => {
     if (currencyTo) {
       setDisabledFrom(false);
       setDisabledTo(false);
-      fetchRate(e.value, currencyTo);
+      fetchCurrencyExchange(e.value, currencyTo);
     }
   };
 
@@ -49,9 +87,19 @@ const Home = () => {
     if (currencyFrom) {
       setDisabledFrom(false);
       setDisabledTo(false);
-      fetchRate(currencyFrom, e.value);
+      fetchCurrencyExchange(currencyFrom, e.value);
     }
   };
+
+  // const fetchExchangeRates = async () => {
+  //   await fetchRates()
+  //     .then(res => filteredRates(res.data.rates, currentValue))
+  //     .catch(err => console.log(err));
+  // };
+
+  // const filteredRates = (rates, current) => {
+  //   current.map(el => console.log(rates[el]));
+  // };
 
   return (
     <div className={css.container}>
@@ -109,6 +157,29 @@ const Home = () => {
         </div>
       </div>
       <h2 className={css.title}>Exchange rates</h2>
+      {/* <button onClick={fetchExchangeRates}>click me</button> */}
+      <div className={css.tableWrapper}>
+        <table className={css.ratesList}>
+          <thead>
+            <tr className={css.ratesHeader}>
+              <th>Currency</th>
+              <th>Code</th>
+              <th>Rate </th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentRates.map(el => {
+              return (
+                <tr className={css.ratesItem}>
+                  <td>{el.title}</td>
+                  <td>{el.name}</td>
+                  <td>{el.rate}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
