@@ -1,20 +1,44 @@
 import css from './Header.module.css';
-import { ReactComponent as Logo } from '../../images/logo.svg';
+import { fetchExchange } from 'operations/fetchCurrencyExchange';
+import { useEffect, useState } from 'react';
+import { ReactComponent as USDLogo } from '../../images/usd.svg';
+import { ReactComponent as EURLogo } from '../../images/eur.svg';
 
 const Header = () => {
+  const [dollarsRate, setDollarsRate] = useState(0);
+  const [eurosRate, setEurosRate] = useState(0);
+
+  const fetchData = async currency => {
+    await fetchExchange(currency)
+      .then(res => {
+        if (currency === 'USD') setDollarsRate(res.data.rates.UAH.rate);
+        if (currency === 'EUR') setEurosRate(res.data.rates.UAH.rate);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchData('USD');
+    fetchData('EUR');
+  }, []);
+
   return (
     <header className={css.header}>
       <div className={css.container}>
-        <Logo className={css.logo} />
         <ul className={css.currentExchange}>
           <li>
-            <p>USD 36.5 / 37.5</p>
+            <USDLogo className={css.currencyLogo} />
+            <p>
+              USD <span>{dollarsRate}</span>
+            </p>
           </li>
           <li>
-            <p>EUR 40.8 / 41.2</p>
+            <EURLogo className={css.currencyLogo} />
+            <p>EUR</p>
+            <span>{eurosRate}</span>
           </li>
         </ul>
-        <ul className={css.navigation}>
+        <ul className={css.linksList}>
           <li>
             <a href="tel:+380685656461" className={css.link}>
               +38(068) 565-64-61

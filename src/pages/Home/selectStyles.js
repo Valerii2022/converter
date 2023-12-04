@@ -5,7 +5,7 @@ export const selectStyles = {
     height: '48px',
     display: 'flex',
     padding: '0',
-    width: '150px',
+    width: '300px',
     paddingLeft: '10px',
     paddingRight: '14px',
     borderRight: 'none',
@@ -13,6 +13,7 @@ export const selectStyles = {
     fontSize: '18px',
     fontWeight: '500',
     lineHeight: '1.11',
+    cursor: 'pointer',
   }),
   option: (styles, { isFocused }) => {
     return {

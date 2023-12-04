@@ -2,95 +2,113 @@ import css from './Home.module.css';
 import Select from 'react-select';
 import { selectStyles } from './selectStyles';
 import { useState } from 'react';
-import axios from 'axios';
-
-// https://exchangeratesapi.io/documentation/
+import { fetchExchange } from 'operations/fetchCurrencyExchange';
 
 const Home = () => {
+  const [rate, setRate] = useState(0);
   const [currencyIn, setCurrencyIn] = useState(0);
   const [currencyOut, setCurrencyOut] = useState(0);
-
-  // const API_KEY = 'VTCLiMLNPGUnzwu7ny7tuLe8dNWU_EW2';
-  // const BASE_URL = 'https://api.exchangeratesapi.io/v1/latest';
-  // const params = {
-  //   access_key: API_KEY,
-  // };
+  const [currencyFrom, setCurrencyFrom] = useState('');
+  const [currencyTo, setCurrencyTo] = useState('');
+  const [disabledFrom, setDisabledFrom] = useState(true);
+  const [disabledTo, setDisabledTo] = useState(true);
 
   const currencyOptions = [
-    { value: 'USD $', label: 'USD $' },
-    { value: 'EUR €', label: 'EUR €' },
-    { value: 'UAH ₴', label: 'UAH ₴' },
+    { value: 'USD', label: 'USD $' },
+    { value: 'EUR', label: 'EUR €' },
+    { value: 'UAH', label: 'UAH ₴' },
+    { value: 'CAD', label: 'CAD $' },
+    { value: 'AUD', label: 'AUD $' },
+    { value: 'PLN', label: 'PLN zł' },
+    { value: 'DKK', label: 'DKK kr' },
   ];
 
-  const fetchExchange = async () => {
-    const data = await axios.get(
-      `https://api.polygon.io/v3/reference/exchanges?asset_class=options&apiKey=VTCLiMLNPGUnzwu7ny7tuLe8dNWU_EW2`
-    );
-    return data;
+  const fetchRate = async (from, to) => {
+    await fetchExchange(from, to)
+      .then(res => {
+        setRate(res.data.rates[to].rate);
+      })
+      .catch(err => console.log(err));
   };
 
-  const handleBtnClick = async () => {
-    await fetchExchange()
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+  const handleSelectFromChange = e => {
+    setCurrencyFrom(e.value);
+    setCurrencyIn(0);
+    setCurrencyOut(0);
+    if (currencyTo) {
+      setDisabledFrom(false);
+      setDisabledTo(false);
+      fetchRate(e.value, currencyTo);
+    }
+  };
+
+  const handleSelectToChange = e => {
+    setCurrencyIn(0);
+    setCurrencyOut(0);
+    setCurrencyTo(e.value);
+    if (currencyFrom) {
+      setDisabledFrom(false);
+      setDisabledTo(false);
+      fetchRate(currencyFrom, e.value);
+    }
   };
 
   return (
     <div className={css.container}>
-      <div className={css.exchangeWrapper}>
-        <p>something</p>
-      </div>
-      <div className={css.converter}>
-        <div className={css.converterInner}>
-          <Select
-            defaultValue={{ value: 'UAH ₴', label: 'UAH ₴' }}
-            // onChange={e => setBrand(e.label)}
-            // maxMenuHeight={272}
-            placeholder="Currency"
-            options={currencyOptions}
-            styles={selectStyles}
-            components={{
-              IndicatorSeparator: () => null,
-            }}
-          />
-          <label>
-            <input
-              value={currencyIn}
-              onChange={e => {
-                setCurrencyIn(e.target.value);
-                setCurrencyOut(e.target.value * 2);
+      <h2 className={css.title}>Currency exchange converter</h2>
+      <div className={css.converterWrapper}>
+        <div className={css.converter}>
+          <div className={css.converterInner}>
+            <Select
+              onChange={handleSelectFromChange}
+              placeholder="Select currency from"
+              options={currencyOptions}
+              styles={selectStyles}
+              components={{
+                IndicatorSeparator: () => null,
               }}
-              type="number"
-              name="currencyIn"
             />
-          </label>
+            <label>
+              <input
+                disabled={disabledFrom}
+                value={currencyIn}
+                onChange={e => {
+                  setCurrencyIn(e.target.value);
+                  setCurrencyOut((e.target.value * rate).toFixed(2));
+                }}
+                type="number"
+                name="currencyIn"
+              />
+            </label>
+          </div>
         </div>
-        <div className={css.converterInner}>
-          <Select
-            defaultValue={{ value: 'USD $', label: 'USD $' }}
-            // onChange={e => setBrand(e.label)}
-            maxMenuHeight={272}
-            placeholder="Currency"
-            options={currencyOptions}
-            styles={selectStyles}
-            components={{
-              IndicatorSeparator: () => null,
-            }}
-          />
-          <label>
-            <input
-              value={currencyOut}
-              onChange={e => {
-                setCurrencyOut(e.target.value);
-                setCurrencyIn(e.target.value / 2);
+        <div className={css.converter}>
+          <div className={css.converterInner}>
+            <Select
+              onChange={handleSelectToChange}
+              placeholder="Select currency to"
+              options={currencyOptions}
+              styles={selectStyles}
+              components={{
+                IndicatorSeparator: () => null,
               }}
-              type="number"
-              name="currencyOut"
             />
-          </label>
+            <label>
+              <input
+                disabled={disabledTo}
+                value={currencyOut}
+                onChange={e => {
+                  setCurrencyOut(e.target.value);
+                  setCurrencyIn((e.target.value / rate).toFixed(2));
+                }}
+                type="number"
+                name="currencyOut"
+              />
+            </label>
+          </div>
         </div>
       </div>
-      <button onClick={() => handleBtnClick()}>Btn</button>
+      <h2 className={css.title}>Exchange rates</h2>
     </div>
   );
 };

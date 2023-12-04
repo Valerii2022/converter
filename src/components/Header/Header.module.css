@@ -12,15 +12,30 @@
   justify-content: space-between;
 }
 
-.logo {
-  width: 40px;
-  height: 40px;
-}
-
 .currentExchange {
   display: flex;
+  gap: 32px;
+  font-size: 22px;
+}
+
+.currentExchange li {
+  display: flex;
+  gap: 8px;
+}
+
+.currencyLogo {
+  width: 24px;
+  height: 24px;
+}
+
+.currentExchange span {
+  color: #fc8700;
+}
+
+.linksList {
+  display: flex;
   gap: 20px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .link {

@@ -1,9 +1,21 @@
 .container {
-  padding: 15px;
+  padding: 50px 15px 15px;
   width: 1440px;
   margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 48px;
+  line-height: 2;
+  color: beige;
+}
+
+.converterWrapper {
   display: flex;
   gap: 20px;
+  margin-bottom: 50px;
 }
 
 .exchangeWrapper {
@@ -34,7 +46,11 @@
   border-radius: 8px;
   background-color: beige;
   border: none;
-
   color: teal;
   font-size: 20px;
+}
+
+.converterInner input:disabled {
+  color: #706e6e;
+  background-color: #ada0a0;
 }

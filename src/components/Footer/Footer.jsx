@@ -14,7 +14,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={css.link}
           >
-            <GithubLogo className={css.icon} width={20} />
+            <GithubLogo className={css.icon} width={24} />
           </a>
         </li>
         <li>
@@ -24,7 +24,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={css.link}
           >
-            <TelegramLogo className={css.icon} width={20} />
+            <TelegramLogo className={css.icon} width={24} />
           </a>
         </li>
         <li>
@@ -34,7 +34,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={css.link}
           >
-            <LinkedinLogo className={css.icon} width={20} />
+            <LinkedinLogo className={css.icon} width={24} />
           </a>
         </li>
       </ul>
