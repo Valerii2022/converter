@@ -1,5 +1,33 @@
-.container {
+.footer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+  background-color: teal;
+  padding: 15px;
+}
+
+.navigation {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.link {
+  color: beige;
+  transition: color 250ms linear;
+}
+
+.link:hover {
+  color: #fc8700;
+}
+
+.icon {
+  fill: currentColor;
+}
+
+.text {
+  color: beige;
+  font-size: 14px;
 }

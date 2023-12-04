@@ -1,3 +1,17 @@
-.title {
-  text-align: center;
+.container {
+  padding: 15px;
+  display: flex;
+  gap: 20px;
+}
+
+.exchangeWrapper {
+  width: calc((100% - 20px) / 2);
+}
+
+.converter {
+  width: calc((100% - 20px) / 2);
+}
+
+.converterInner {
+  display: flex;
 }
