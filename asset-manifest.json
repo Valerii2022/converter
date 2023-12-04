@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/converter/static/css/main.7e5859ba.css",
-    "main.js": "/converter/static/js/main.6c2260c1.js",
+    "main.css": "/converter/static/css/main.cc9f7024.css",
+    "main.js": "/converter/static/js/main.ccc4a5e8.js",
+    "static/media/bg.jpg": "/converter/static/media/bg.7bbe8646560996f3185e.jpg",
     "static/media/logo.svg": "/converter/static/media/logo.1819ee596da083bfb31463c6cab23c9c.svg",
     "static/media/github.svg": "/converter/static/media/github.9a340d0b25733df796bfd93a36313d7b.svg",
     "static/media/linkedin.svg": "/converter/static/media/linkedin.3bcd993532f57a6ef94abac65aa91014.svg",
     "static/media/telegram.svg": "/converter/static/media/telegram.baca57c8a84acac12036659d7d57562a.svg",
     "index.html": "/converter/index.html",
-    "main.7e5859ba.css.map": "/converter/static/css/main.7e5859ba.css.map",
-    "main.6c2260c1.js.map": "/converter/static/js/main.6c2260c1.js.map"
+    "main.cc9f7024.css.map": "/converter/static/css/main.cc9f7024.css.map",
+    "main.ccc4a5e8.js.map": "/converter/static/js/main.ccc4a5e8.js.map"
   },
   "entrypoints": [
-    "static/css/main.7e5859ba.css",
-    "static/js/main.6c2260c1.js"
+    "static/css/main.cc9f7024.css",
+    "static/js/main.ccc4a5e8.js"
   ]
 }
