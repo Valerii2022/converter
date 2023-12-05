@@ -2,9 +2,9 @@ import css from './Home.module.css';
 import Select from 'react-select';
 import { selectStyles } from './selectStyles';
 import { useState } from 'react';
-import { fetchExchange } from 'operations/fetchCurrencyExchange';
+import { nanoid } from 'nanoid';
 
-const Home = () => {
+const Home = prop => {
   const [rate, setRate] = useState(0);
   const [currencyIn, setCurrencyIn] = useState(0);
   const [currencyOut, setCurrencyOut] = useState(0);
@@ -14,36 +14,7 @@ const Home = () => {
   const [disabledTo, setDisabledTo] = useState(true);
 
   const currentValue = [];
-  const currentRates = [
-    { title: 'Opssss', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-    { title: 'United states dollars', name: 'USD', rate: 36.3554 },
-    { title: 'Euro', name: 'EUR', rate: 39.3652 },
-  ];
+  const currentRates = [];
 
   const currencyOptions = [
     { value: 'USD', label: 'USD $' },
@@ -61,13 +32,13 @@ const Home = () => {
     }
   });
 
-  const fetchCurrencyExchange = async (from, to) => {
-    await fetchExchange(from, to)
-      .then(res => {
-        setRate(res.data.rates[to].rate);
-      })
-      .catch(err => console.log(err));
-  };
+  for (const key in prop.rates) {
+    currentRates.push({
+      name: key,
+      title: prop.rates[key].currency_name,
+      rate: (1 / prop.rates[key].rate).toFixed(4),
+    });
+  }
 
   const handleSelectFromChange = e => {
     setCurrencyFrom(e.value);
@@ -76,7 +47,6 @@ const Home = () => {
     if (currencyTo) {
       setDisabledFrom(false);
       setDisabledTo(false);
-      fetchCurrencyExchange(e.value, currencyTo);
     }
   };
 
@@ -87,19 +57,24 @@ const Home = () => {
     if (currencyFrom) {
       setDisabledFrom(false);
       setDisabledTo(false);
-      fetchCurrencyExchange(currencyFrom, e.value);
     }
   };
 
-  // const fetchExchangeRates = async () => {
-  //   await fetchRates()
-  //     .then(res => filteredRates(res.data.rates, currentValue))
-  //     .catch(err => console.log(err));
-  // };
-
-  // const filteredRates = (rates, current) => {
-  //   current.map(el => console.log(rates[el]));
-  // };
+  const convert = () => {
+    const rateFrom = currentRates.find(el => {
+      if (el.name === currencyFrom) {
+        return el.rate;
+      }
+      return 0;
+    });
+    const rateTo = currentRates.find(el => {
+      if (el.name === currencyTo) {
+        return el.rate;
+      }
+      return 0;
+    });
+    setRate(rateFrom.rate / rateTo.rate);
+  };
 
   return (
     <div className={css.container}>
@@ -122,6 +97,7 @@ const Home = () => {
                 value={currencyIn}
                 onChange={e => {
                   setCurrencyIn(e.target.value);
+                  convert();
                   setCurrencyOut((e.target.value * rate).toFixed(2));
                 }}
                 type="number"
@@ -157,20 +133,19 @@ const Home = () => {
         </div>
       </div>
       <h2 className={css.title}>Exchange rates</h2>
-      {/* <button onClick={fetchExchangeRates}>click me</button> */}
       <div className={css.tableWrapper}>
         <table className={css.ratesList}>
           <thead>
             <tr className={css.ratesHeader}>
               <th>Currency</th>
               <th>Code</th>
-              <th>Rate </th>
+              <th>UAH</th>
             </tr>
           </thead>
           <tbody>
             {currentRates.map(el => {
               return (
-                <tr className={css.ratesItem}>
+                <tr key={nanoid(6)} className={css.ratesItem}>
                   <td>{el.title}</td>
                   <td>{el.name}</td>
                   <td>{el.rate}</td>
