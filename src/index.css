@@ -40,11 +40,11 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: beige;
+  background: rgb(165, 165, 142);
   border-radius: 0 4px 4px 0;
   overflow: hidden;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: teal;
+  background: #fc8700;
 }
