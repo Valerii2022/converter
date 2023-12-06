@@ -101,6 +101,7 @@ const Home = prop => {
                   setCurrencyOut((e.target.value * rate).toFixed(2));
                 }}
                 type="number"
+                min={0}
                 name="currencyIn"
               />
             </label>
@@ -126,6 +127,7 @@ const Home = prop => {
                   setCurrencyIn((e.target.value / rate).toFixed(2));
                 }}
                 type="number"
+                min={0}
                 name="currencyOut"
               />
             </label>
