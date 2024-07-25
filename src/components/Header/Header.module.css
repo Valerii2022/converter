@@ -4,7 +4,7 @@
 }
 
 .container {
-  width: 1440px;
+  max-width: 375px;
   margin: 0 auto;
   padding: 15px;
   display: flex;
@@ -14,7 +14,7 @@
 
 .currentExchange {
   display: flex;
-  gap: 32px;
+  gap: 8px;
   font-size: 22px;
 }
 
@@ -23,7 +23,8 @@
   gap: 8px;
 }
 
-.currencyLogo {
+.currencyLogo,
+.contactIcon {
   width: 24px;
   height: 24px;
 }
@@ -45,4 +46,38 @@
 
 .link:hover {
   color: #fc8700;
+}
+
+@media screen and (max-width: 767px) {
+  .currentExchange {
+    flex-direction: column;
+  }
+
+  .currentExchange p {
+    display: none;
+  }
+
+  .link span {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+
+  .currentExchange {
+    gap: 32px;
+  }
+
+  .contactIcon {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+  }
 }

@@ -10,11 +10,11 @@ const Header = prop => {
           <li>
             <USDLogo className={css.currencyLogo} />
             <p>
-              USD{' '}
+              USD
+            </p>
               <span>
                 {prop.rates ? (1 / prop.rates.USD.rate).toFixed(4) : 0}
               </span>
-            </p>
           </li>
           <li>
             <EURLogo className={css.currencyLogo} />
@@ -27,12 +27,14 @@ const Header = prop => {
         <ul className={css.linksList}>
           <li>
             <a href="tel:+380685656461" className={css.link}>
-              +38(068) 565-64-61
+              <EURLogo className={css.contactIcon} />
+              <span>+38(068) 565-64-61</span>
             </a>
           </li>
           <li>
             <a href="mailto:vmpometun@gmail.com" className={css.link}>
-              vmpometun@gmail.com
+              <EURLogo className={css.contactIcon} />
+              <span>vmpometun@gmail.com</span>
             </a>
           </li>
         </ul>
